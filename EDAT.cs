@@ -1,3 +1,5 @@
+using System;
+using System.Reflection;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -6,6 +8,13 @@ namespace EDAT
 {
 	public class EDAT : Mod
 	{
+		public EDAT()
+		{
+			Type mod = typeof(ModLoader).Assembly.GetType("Terraria.ModLoader.Mod");
+			PropertyInfo displayName = mod.GetProperty("DisplayName");
+			displayName.SetValue(mod, $"[i/{ModContent.ItemType<Unbenannt>()}] [c/1cd85e:Everything Deserves a Theme]");
+		}
+
 		public override void UpdateMusic(ref int music, ref MusicPriority priority)
 		{
 			if (Main.musicVolume != 0)
