@@ -1,6 +1,5 @@
-using System;
 using System.ComponentModel;
-using System.Reflection;
+using System.IO;
 using Terraria;
 using Terraria.GameContent.Events;
 using Terraria.ID;
@@ -52,7 +51,6 @@ namespace EDAT
 						music = GetSoundSlot(SoundType.Music, "Sounds/Music/BrainOfCthulhu");
 						priority = MusicPriority.BossHigh;
 					}
-					//queen bee??
 					if (NPC.AnyNPCs(NPCID.Retinazer) || NPC.AnyNPCs(NPCID.Spazmatism))
 					{
 						music = GetSoundSlot(SoundType.Music, "Sounds/Music/Twins");
@@ -82,11 +80,6 @@ namespace EDAT
 						priority = MusicPriority.BossHigh;
 					}
 					//Biomes
-					if (Main.LocalPlayer.ZoneUndergroundDesert)
-					{
-						music = GetSoundSlot(SoundType.Music, "Sounds/Music/UndergroundDesert");
-						priority = MusicPriority.BiomeMedium;
-					}
 					if (Main.LocalPlayer.ZoneJungle && !Main.LocalPlayer.ZoneRockLayerHeight)
 					{
 						music = GetSoundSlot(SoundType.Music, "Sounds/Music/Jungle");
@@ -107,14 +100,44 @@ namespace EDAT
 						music = GetSoundSlot(SoundType.Music, "Sounds/Music/UndergroundCrimson");
 						priority = MusicPriority.BiomeMedium;
 					}
+					if (Main.LocalPlayer.ZoneUndergroundDesert)
+					{
+						music = GetSoundSlot(SoundType.Music, "Sounds/Music/UndergroundDesert");
+						priority = MusicPriority.BiomeMedium;
+					}
 					if (Main.LocalPlayer.ZoneMeteor)
 					{
 						music = GetSoundSlot(SoundType.Music, "Sounds/Music/Meteor");
 						priority = MusicPriority.BiomeMedium;
 					}
-					if ()
+					if (ModContent.GetInstance<Player>().ZoneMarble)
 					{
-						music = GetSoundSlot(SoundType.Music, "Sounds/Music/Meteor");
+						music = GetSoundSlot(SoundType.Music, "Sounds/Music/Marble");
+						priority = MusicPriority.BiomeMedium;
+					}
+					if (ModContent.GetInstance<Player>().ZoneGranite)
+					{
+						music = GetSoundSlot(SoundType.Music, "Sounds/Music/Granite");
+						priority = MusicPriority.BiomeMedium;
+					}
+					if (ModContent.GetInstance<Player>().ZoneBeeHive)
+					{
+						music = GetSoundSlot(SoundType.Music, "Sounds/Music/BeeHive");
+						priority = MusicPriority.BiomeMedium;
+					}
+					if (ModContent.GetInstance<Player>().ZoneSpiderCave)
+					{
+						music = GetSoundSlot(SoundType.Music, "Sounds/Music/SpiderCave");
+						priority = MusicPriority.BiomeMedium;
+					}
+					if (Main.LocalPlayer.ZoneSnow && !Main.LocalPlayer.ZoneRockLayerHeight)
+					{
+						music = MusicID.Ice;
+						priority = MusicPriority.BiomeMedium;
+					}
+					if (Main.LocalPlayer.ZoneSnow && Main.LocalPlayer.ZoneRockLayerHeight)
+					{
+						music = MusicID.Snow;
 						priority = MusicPriority.BiomeMedium;
 					}
 					int hellAlt = Main.rand.Next(1);
@@ -126,30 +149,6 @@ namespace EDAT
 					else if (Main.LocalPlayer.ZoneUnderworldHeight && hellAlt == 1)
 					{
 						music = MusicID.Hell;
-						priority = MusicPriority.BiomeMedium;
-					}
-					/*
-					//Marble
-					if ()
-					{
-						music = GetSoundSlot(SoundType.Music, "Sounds/Music/Marble");
-						priority = MusicPriority.BiomeMedium;
-					}
-					//Granite
-					if ()
-					{
-						music = GetSoundSlot(SoundType.Music, "Sounds/Music/Granite");
-						priority = MusicPriority.BiomeMedium;
-					}
-					*/
-					if (Main.LocalPlayer.ZoneSnow && !Main.LocalPlayer.ZoneRockLayerHeight)
-					{
-						music = MusicID.Ice;
-						priority = MusicPriority.BiomeMedium;
-					}
-					if (Main.LocalPlayer.ZoneSnow && Main.LocalPlayer.ZoneRockLayerHeight)
-					{
-						music = MusicID.Snow;
 						priority = MusicPriority.BiomeMedium;
 					}
 					//Events
@@ -168,7 +167,7 @@ namespace EDAT
 						music = GetSoundSlot(SoundType.Music, "Sounds/Music/Party");
 						priority = MusicPriority.Event;
 					}
-					if ()
+					if (Main.invasionType == InvasionID.SnowLegion)
 					{
 						music = GetSoundSlot(SoundType.Music, "Sounds/Music/FrostLegion");
 						priority = MusicPriority.Event;
@@ -186,5 +185,52 @@ namespace EDAT
 		[Tooltip("True to change Destoryer's theme. This is a config option because it's the last boss that uses Boss 3. True will have NO bosses play Boss 3, false will have the Destroyer play Boss 3.")]
 		[DefaultValue(true)]
 		public bool DestroyerTheme;
+	}
+
+	public class Player : ModPlayer
+	{
+		public bool ZoneGranite;
+		public bool ZoneMarble;
+		public bool ZoneBeeHive;
+		public bool ZoneSpiderCave;
+
+		public override void UpdateBiomes()
+		{
+			ZoneGranite = World.ZoneGranite > 75;
+			ZoneMarble = World.ZoneMarble > 75;
+			ZoneBeeHive = World.ZoneBeehive > 75;
+			ZoneSpiderCave = Main.tile[(int)Main.LocalPlayer.position.X / 16, (int)Main.LocalPlayer.position.Y / 16].wall == WallID.SpiderUnsafe;
+		}
+
+		public override void SendCustomBiomes(BinaryWriter writer)
+		{
+			BitsByte flags = new BitsByte();
+			flags[0] = ZoneGranite;
+			flags[1] = ZoneMarble;
+			flags[2] = ZoneBeeHive;
+			writer.Write(flags);
+		}
+
+		public override void ReceiveCustomBiomes(BinaryReader reader)
+		{
+			BitsByte flags = reader.ReadByte();
+			ZoneGranite = flags[0];
+			ZoneMarble = flags[1];
+			ZoneBeeHive = flags[2];
+		}
+	}
+
+	public class World : ModWorld
+	{
+		public static int ZoneGranite;
+		public static int ZoneMarble;
+		public static int ZoneBeehive;
+
+		public override void TileCountsAvailable(int[] tileCounts)
+		{
+			ZoneGranite = tileCounts[TileID.Granite];
+			ZoneMarble = tileCounts[TileID.Marble];
+			ZoneBeehive = tileCounts[TileID.Hive];
+		}
 	}
 }
