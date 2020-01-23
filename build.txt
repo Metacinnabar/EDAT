@@ -1,3 +1,5 @@
-displayName = [i/s1:562] [c/1cd85e:Everything Deserves a Theme]
-author = Coded by GoodPro712, Music & Sprites by Lonely Star
-version = 1.19
+displayName = [i/s1:576] [c/1cd85e:Everything Deserves a Theme]
+author = GoodPro712, Lonely Star
+version = 1.6
+homepage = https://forums.terraria.org/index.php?threads/everything-deserves-a-theme.85347/
+modReferences = GoodProLib@0.2
