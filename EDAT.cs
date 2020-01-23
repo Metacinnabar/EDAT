@@ -140,7 +140,7 @@ namespace EDAT
 							music = GetSoundSlot(SoundType.Music, "Sounds/Music/BloodMoon");
 							priority = MusicPriority.Event;
 						}
-						if (BirthdayParty.PartyIsUp)
+						if (BirthdayParty.PartyIsUp && BiomeData.ZoneTown)
 						{
 							music = GetSoundSlot(SoundType.Music, "Sounds/Music/Party");
 							priority = MusicPriority.Event;
