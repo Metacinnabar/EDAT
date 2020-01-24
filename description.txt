@@ -5,6 +5,7 @@ In vanilla six bosses alone share the Boss 1 Theme for example, with this mod ev
 Forum: https://forums.terraria.org/index.php?threads/85347/
 Discord: https://discord.gg/VrxSx4B
 Github: https://github.com/GoodPro712/EDAT
+Youtube: https://www.youtube.com/channel/UC96qaFEnCyHbPwafxmzBpyw
 
 Thanks to Overhaul for the code for the checking for a town for the village theme.
 Thanks to Lonely Star for all the music and sprites

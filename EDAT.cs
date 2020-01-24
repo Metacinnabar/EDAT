@@ -1,8 +1,9 @@
+using EDAT.Items;
+using EDAT.Tiles;
 using GoodProLib.Bindings;
 using GoodProLib.GData;
 using GoodProLib.GUtils;
 using Microsoft.Xna.Framework.Graphics;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using Terraria;
@@ -24,6 +25,30 @@ namespace EDAT
 			unloadCalled = false;
 
 			musicBoxes = Main.tileTexture[TileID.MusicBoxes];
+
+			if(!Main.dedServ)
+			{
+				AddMusicBox(GetSoundSlot(SoundType.Music, "Sounds/Music/KingSlime"), ModContent.ItemType<KingSlime>(), ModContent.TileType<KingSlimeTile>());
+				AddMusicBox(GetSoundSlot(SoundType.Music, "Sounds/Music/EyeOfCthulhu"), ModContent.ItemType<EyeOfCthulhu>(), ModContent.TileType<EyeOfCthulhuTile>());
+				AddMusicBox(GetSoundSlot(SoundType.Music, "Sounds/Music/EaterOfWorlds"), ModContent.ItemType<EaterOfWorlds>(), ModContent.TileType<EaterOfWorldsTile>());
+				AddMusicBox(GetSoundSlot(SoundType.Music, "Sounds/Music/BrainOfCthulhu"), ModContent.ItemType<BrainOfCthulhu>(), ModContent.TileType<BrainOfCthulhuTile>());
+				AddMusicBox(GetSoundSlot(SoundType.Music, "Sounds/Music/Twins"), ModContent.ItemType<Twins>(), ModContent.TileType<TwinsTile>());
+				AddMusicBox(GetSoundSlot(SoundType.Music, "Sounds/Music/SkeletronPrime"), ModContent.ItemType<SkeletronPrime>(), ModContent.TileType<SkeletronPrimeTile>());
+				//Destroyer box??
+				AddMusicBox(GetSoundSlot(SoundType.Music, "Sounds/Music/DukeFishron"), ModContent.ItemType<DukeFishron>(), ModContent.TileType<DukeFishronTile>());
+				AddMusicBox(GetSoundSlot(SoundType.Music, "Sounds/Music/LunaticCultist"), ModContent.ItemType<LunaticCultist>(), ModContent.TileType<LunaticCultistTile>());
+				AddMusicBox(GetSoundSlot(SoundType.Music, "Sounds/Music/SlimeRain"), ModContent.ItemType<SlimeRain>(), ModContent.TileType<SlimeRainTile>());
+				//Blood moon??
+				AddMusicBox(GetSoundSlot(SoundType.Music, "Sounds/Music/Party"), ModContent.ItemType<Party>(), ModContent.TileType<PartyTile>());
+				AddMusicBox(GetSoundSlot(SoundType.Music, "Sounds/Music/FrostLegion"), ModContent.ItemType<FrostLegion>(), ModContent.TileType<FrostLegionTile>());
+				AddMusicBox(GetSoundSlot(SoundType.Music, "Sounds/Music/Jungle"), ModContent.ItemType<JungleOverworld>(), ModContent.TileType<JungleOverworldTile>());
+				AddMusicBox(GetSoundSlot(SoundType.Music, "Sounds/Music/GlowingMushroom"), ModContent.ItemType<MushroomOverworld>(), ModContent.TileType<MushroomOverworldTile>()); 
+				AddMusicBox(GetSoundSlot(SoundType.Music, "Sounds/Music/UndergroundDesert"), ModContent.ItemType<UndergroundDesert>(), ModContent.TileType<UndergroundDesertTile>());
+				//AddMusicBox(GetSoundSlot(SoundType.Music, "Sounds/Music/Marble"), ModContent.ItemType<Marble>(), ModContent.TileType<MarbleTile>());
+				AddMusicBox(GetSoundSlot(SoundType.Music, "Sounds/Music/Granite"), ModContent.ItemType<Granite>(), ModContent.TileType<GraniteTile>());
+				AddMusicBox(GetSoundSlot(SoundType.Music, "Sounds/Music/SpiderCave"), ModContent.ItemType<SpiderNest>(), ModContent.TileType<SpiderNestTile>());
+				AddMusicBox(GetSoundSlot(SoundType.Music, "Sounds/Music/Village"), ModContent.ItemType<Town>(), ModContent.TileType<TownTile>());
+			}
 		}
 
 		public override void Unload()
@@ -31,9 +56,7 @@ namespace EDAT
 			unloadCalled = true;
 
 			if (!Main.dedServ)
-			{
 				Main.tileTexture[TileID.MusicBoxes] = musicBoxes;
-			}
 		}
 
 		public override void PostSetupContent()
@@ -174,7 +197,7 @@ namespace EDAT
 							music = GetSoundSlot(SoundType.Music, "Sounds/Music/UndergroundCrimson");
 							priority = MusicPriority.BiomeMedium;
 						}
-						if (Main.LocalPlayer.ZoneUndergroundDesert && Main.LocalPlayer.ZoneRockLayerHeight)
+						if (Main.LocalPlayer.ZoneUndergroundDesert && (Main.LocalPlayer.ZoneRockLayerHeight || Main.LocalPlayer.ZoneDirtLayerHeight))
 						{
 							music = GetSoundSlot(SoundType.Music, "Sounds/Music/UndergroundDesert");
 							priority = MusicPriority.BiomeMedium;
@@ -187,11 +210,6 @@ namespace EDAT
 						if (BiomeData.ZoneGranite)
 						{
 							music = GetSoundSlot(SoundType.Music, "Sounds/Music/Granite");
-							priority = MusicPriority.BiomeMedium;
-						}
-						if (BiomeData.ZoneHive)
-						{
-							music = GetSoundSlot(SoundType.Music, "Sounds/Music/BeeHive");
 							priority = MusicPriority.BiomeMedium;
 						}
 						if (BiomeData.ZoneSpiderCave)
@@ -271,7 +289,6 @@ namespace EDAT
 		public override void OnEnterWorld(Player player)
 		{
 			if (!Main.dedServ)
-			{
 				switch (TileUtils.GetDungeonColor())
 				{
 					case DungeonColor.Pink:
@@ -291,7 +308,6 @@ namespace EDAT
 						break;
 				}
 
-			}
 		}
 	}
 }
