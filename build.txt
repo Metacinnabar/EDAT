@@ -1,6 +1,6 @@
 displayName = [i/s1:576] [c/1cd85e:Everything Deserves a Theme]
 author = GoodPro712, Lonely Star
-version = 3.2
+version = 3.3
 homepage = https://forums.terraria.org/index.php?threads/everything-deserves-a-theme.85347/
 modReferences = GoodProLib@0.2
 buildIgnore = *.rtf

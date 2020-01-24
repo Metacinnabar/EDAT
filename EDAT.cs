@@ -150,9 +150,9 @@ namespace EDAT
 							priority = MusicPriority.BossHigh;
 						}
 					}
-					//Invasions as second priority
-					else if (Main.invasionX == Main.spawnTileX)
+					else
 					{
+						//Invasions
 						if (Main.slimeRain)
 						{
 							music = GetSoundSlot(SoundType.Music, "Sounds/Music/SlimeRain");
@@ -173,10 +173,7 @@ namespace EDAT
 							music = GetSoundSlot(SoundType.Music, "Sounds/Music/FrostLegion");
 							priority = MusicPriority.Event;
 						}
-					}
-					//Biomes as third and last priority
-					else
-					{
+						//Biomes
 						if (Main.LocalPlayer.ZoneJungle && !Main.LocalPlayer.ZoneRockLayerHeight)
 						{
 							music = GetSoundSlot(SoundType.Music, "Sounds/Music/Jungle");
