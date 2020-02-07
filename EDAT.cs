@@ -18,7 +18,7 @@ namespace EDAT
 	{
 		private Texture2D musicBoxes;
 
-		public static bool unloadCalled = false;
+		public bool unloadCalled = false;
 
 		public override void Load()
 		{
@@ -26,7 +26,7 @@ namespace EDAT
 
 			musicBoxes = Main.tileTexture[TileID.MusicBoxes];
 
-			if(!Main.dedServ)
+			if (!Main.dedServ)
 			{
 				AddMusicBox(GetSoundSlot(SoundType.Music, "Sounds/Music/KingSlime"), ModContent.ItemType<KingSlime>(), ModContent.TileType<KingSlimeTile>());
 				AddMusicBox(GetSoundSlot(SoundType.Music, "Sounds/Music/EyeOfCthulhu"), ModContent.ItemType<EyeOfCthulhu>(), ModContent.TileType<EyeOfCthulhuTile>());
@@ -34,17 +34,15 @@ namespace EDAT
 				AddMusicBox(GetSoundSlot(SoundType.Music, "Sounds/Music/BrainOfCthulhu"), ModContent.ItemType<BrainOfCthulhu>(), ModContent.TileType<BrainOfCthulhuTile>());
 				AddMusicBox(GetSoundSlot(SoundType.Music, "Sounds/Music/Twins"), ModContent.ItemType<Twins>(), ModContent.TileType<TwinsTile>());
 				AddMusicBox(GetSoundSlot(SoundType.Music, "Sounds/Music/SkeletronPrime"), ModContent.ItemType<SkeletronPrime>(), ModContent.TileType<SkeletronPrimeTile>());
-				//Destroyer box??
 				AddMusicBox(GetSoundSlot(SoundType.Music, "Sounds/Music/DukeFishron"), ModContent.ItemType<DukeFishron>(), ModContent.TileType<DukeFishronTile>());
 				AddMusicBox(GetSoundSlot(SoundType.Music, "Sounds/Music/LunaticCultist"), ModContent.ItemType<LunaticCultist>(), ModContent.TileType<LunaticCultistTile>());
 				AddMusicBox(GetSoundSlot(SoundType.Music, "Sounds/Music/SlimeRain"), ModContent.ItemType<SlimeRain>(), ModContent.TileType<SlimeRainTile>());
-				//Blood moon??
 				AddMusicBox(GetSoundSlot(SoundType.Music, "Sounds/Music/Party"), ModContent.ItemType<Party>(), ModContent.TileType<PartyTile>());
 				AddMusicBox(GetSoundSlot(SoundType.Music, "Sounds/Music/FrostLegion"), ModContent.ItemType<FrostLegion>(), ModContent.TileType<FrostLegionTile>());
 				AddMusicBox(GetSoundSlot(SoundType.Music, "Sounds/Music/Jungle"), ModContent.ItemType<JungleOverworld>(), ModContent.TileType<JungleOverworldTile>());
-				AddMusicBox(GetSoundSlot(SoundType.Music, "Sounds/Music/GlowingMushroom"), ModContent.ItemType<MushroomOverworld>(), ModContent.TileType<MushroomOverworldTile>()); 
+				AddMusicBox(GetSoundSlot(SoundType.Music, "Sounds/Music/GlowingMushroom"), ModContent.ItemType<MushroomOverworld>(), ModContent.TileType<MushroomOverworldTile>());
 				AddMusicBox(GetSoundSlot(SoundType.Music, "Sounds/Music/UndergroundDesert"), ModContent.ItemType<UndergroundDesert>(), ModContent.TileType<UndergroundDesertTile>());
-				//AddMusicBox(GetSoundSlot(SoundType.Music, "Sounds/Music/Marble"), ModContent.ItemType<Marble>(), ModContent.TileType<MarbleTile>());
+				AddMusicBox(GetSoundSlot(SoundType.Music, "Sounds/Music/Marble"), ModContent.ItemType<Marble>(), ModContent.TileType<MarbleTile>());
 				AddMusicBox(GetSoundSlot(SoundType.Music, "Sounds/Music/Granite"), ModContent.ItemType<Granite>(), ModContent.TileType<GraniteTile>());
 				AddMusicBox(GetSoundSlot(SoundType.Music, "Sounds/Music/SpiderCave"), ModContent.ItemType<SpiderNest>(), ModContent.TileType<SpiderNestTile>());
 				AddMusicBox(GetSoundSlot(SoundType.Music, "Sounds/Music/Village"), ModContent.ItemType<Town>(), ModContent.TileType<TownTile>());
@@ -132,12 +130,6 @@ namespace EDAT
 						{
 							music = GetSoundSlot(SoundType.Music, "Sounds/Music/SkeletronPrime");
 							priority = MusicPriority.BossHigh;
-						}
-						if (ModContent.GetInstance<Config>().DestroyerTheme && NPC.AnyNPCs(NPCID.TheDestroyer))
-						{
-							music = GetSoundSlot(SoundType.Music, "Sounds/Music/TheDestroyer");
-							priority = MusicPriority.BossHigh;
-
 						}
 						if (NPC.AnyNPCs(NPCID.DukeFishron))
 						{
@@ -243,32 +235,11 @@ namespace EDAT
 			else
 				Main.itemTexture[item] = ModContent.GetTexture(newItemPath);
 		}
-
-		public static void ReplaceItemTextures(int[] oldItems, string[] newItemPaths, bool unloadCalled)
-		{
-			foreach (string itemPath in newItemPaths)
-			{
-				foreach (int item in oldItems)
-				{
-					Texture2D itemBackup = Main.itemTexture[item];
-
-					if (unloadCalled)
-						Main.itemTexture[item] = itemBackup;
-					else
-						Main.itemTexture[item] = ModContent.GetTexture(itemPath);
-				}
-			}
-		}
 	}
 
 	public class Config : ModConfig
 	{
 		public override ConfigScope Mode => ConfigScope.ClientSide;
-
-		[Label("Destroyer's Theme Change")]
-		[Tooltip("True to change Destoryer's theme. This is a config option because it's the last boss that uses Boss 3. True will have NO bosses play Boss 3, false will have the Destroyer play Boss 3.")]
-		[DefaultValue(true)]
-		public bool DestroyerTheme;
 
 		[Label("Underground Corruption's Theme Change")]
 		[Tooltip("True to change Underground Corruption's theme. This is a config option because it's the only biome that uses the vanilla underground corruption theme. True will have NO biomes play underground corruption, false will have the underground corruption play vanilla underground corruption")]
@@ -290,21 +261,20 @@ namespace EDAT
 				{
 					case DungeonColor.Pink:
 						Main.tileTexture[TileID.MusicBoxes] = ModContent.GetTexture("EDAT/MusicBoxes_PinkDungeon");
-						EDAT.ReplaceItemTexture(ItemID.MusicBoxDungeon, "EDAT/Items/Replacments/PinkDungeon", EDAT.unloadCalled);
+						EDAT.ReplaceItemTexture(ItemID.MusicBoxDungeon, "EDAT/Items/Replacments/PinkDungeon", ModContent.GetInstance<EDAT>().unloadCalled);
 						break;
 					case DungeonColor.Green:
 						Main.tileTexture[TileID.MusicBoxes] = ModContent.GetTexture("EDAT/MusicBoxes_GreenDungeon");
-						EDAT.ReplaceItemTexture(ItemID.MusicBoxDungeon, "EDAT/Items/Replacments/GreenDungeon", EDAT.unloadCalled);
+						EDAT.ReplaceItemTexture(ItemID.MusicBoxDungeon, "EDAT/Items/Replacments/GreenDungeon", ModContent.GetInstance<EDAT>().unloadCalled);
 						break;
 					case DungeonColor.Blue:
 						Main.tileTexture[TileID.MusicBoxes] = ModContent.GetTexture("EDAT/MusicBoxes_BlueDungeon");
-						EDAT.ReplaceItemTexture(ItemID.MusicBoxDungeon, "EDAT/Items/Replacments/BlueDungeon", EDAT.unloadCalled);
+						EDAT.ReplaceItemTexture(ItemID.MusicBoxDungeon, "EDAT/Items/Replacments/BlueDungeon", ModContent.GetInstance<EDAT>().unloadCalled);
 						break;
 					case DungeonColor.None:
 						Main.tileTexture[TileID.MusicBoxes] = ModContent.GetTexture("EDAT/MusicBoxes_BlueDungeon");
 						break;
 				}
-
 		}
 	}
 }
