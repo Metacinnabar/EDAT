@@ -1,16 +1,11 @@
 using EDAT.Items;
 using EDAT.Tiles;
-using GoodProLib.Bindings;
-using GoodProLib.GData;
-using GoodProLib.GUtils;
 using Microsoft.Xna.Framework.Graphics;
-using System.ComponentModel;
 using System.Linq;
 using Terraria;
 using Terraria.GameContent.Events;
 using Terraria.ID;
 using Terraria.ModLoader;
-using Terraria.ModLoader.Config;
 
 namespace EDAT
 {
@@ -64,30 +59,30 @@ namespace EDAT
 				if (!Main.dedServ)
 				{
 					musicBoxes = Main.tileTexture[TileID.MusicBoxes];
-					ReplaceItemTexture(ItemID.MusicBoxCorruption, "Items/Replacments/Corruption", unloadCalled);
-					ReplaceItemTexture(ItemID.MusicBoxCrimson, "Items/Replacments/Crimson", unloadCalled);
-					ReplaceItemTexture(ItemID.MusicBoxDesert, "Items/Replacments/Desert", unloadCalled);
-					ReplaceItemTexture(ItemID.MusicBoxBoss3, "Items/Replacments/Destroyer", unloadCalled);
-					ReplaceItemTexture(ItemID.MusicBoxFrostMoon, "Items/Replacments/FrostMoon", unloadCalled);
-					ReplaceItemTexture(ItemID.MusicBoxBoss4, "Items/Replacments/Golem", unloadCalled);
-					ReplaceItemTexture(ItemID.MusicBoxTheHallow, "Items/Replacments/Hallow", unloadCalled);
-					ReplaceItemTexture(ItemID.MusicBoxHell, "Items/Replacments/Hell", unloadCalled);
-					ReplaceItemTexture(ItemID.MusicBoxIce, "Items/Replacments/Ice", unloadCalled);
-					ReplaceItemTexture(ItemID.MusicBoxMartians, "Items/Replacments/Martian", unloadCalled);
-					ReplaceItemTexture(ItemID.MusicBoxEerie, "Items/Replacments/Meteor", unloadCalled);
-					ReplaceItemTexture(ItemID.MusicBoxLunarBoss, "Items/Replacments/MoonLord", unloadCalled);
-					ReplaceItemTexture(ItemID.MusicBoxDD2, "Items/Replacments/OOA", unloadCalled);
-					ReplaceItemTexture(ItemID.MusicBoxTowers, "Items/Replacments/Pillar", unloadCalled);
-					ReplaceItemTexture(ItemID.MusicBoxBoss5, "Items/Replacments/QueenBee", unloadCalled);
-					ReplaceItemTexture(ItemID.MusicBoxRain, "Items/Replacments/Rain", unloadCalled);
-					ReplaceItemTexture(ItemID.MusicBoxSnow, "Items/Replacments/Snow", unloadCalled);
-					ReplaceItemTexture(ItemID.MusicBoxEclipse, "Items/Replacments/SolarEclipse", unloadCalled);
-					ReplaceItemTexture(ItemID.MusicBoxSpace, "Items/Replacments/Space", unloadCalled);
-					ReplaceItemTexture(ItemID.MusicBoxTitle, "Items/Replacments/Title", unloadCalled);
-					ReplaceItemTexture(ItemID.MusicBoxUndergroundCrimson, "Items/Replacments/UndergroundCrimson", unloadCalled);
-					ReplaceItemTexture(ItemID.MusicBoxUndergroundCorruption, "Items/Replacments/UndergroundCorruption", unloadCalled);
-					ReplaceItemTexture(ItemID.MusicBoxUndergroundHallow, "Items/Replacments/UndergroundHallow", unloadCalled);
-					ReplaceItemTexture(ItemID.MusicBoxBoss2, "Items/Replacments/WallOfFlesh", unloadCalled);
+					Helper.ReplaceItemTexture(ItemID.MusicBoxCorruption, "Items/Replacments/Corruption", unloadCalled);
+					Helper.ReplaceItemTexture(ItemID.MusicBoxCrimson, "Items/Replacments/Crimson", unloadCalled);
+					Helper.ReplaceItemTexture(ItemID.MusicBoxDesert, "Items/Replacments/Desert", unloadCalled);
+					Helper.ReplaceItemTexture(ItemID.MusicBoxBoss3, "Items/Replacments/Destroyer", unloadCalled);
+					Helper.ReplaceItemTexture(ItemID.MusicBoxFrostMoon, "Items/Replacments/FrostMoon", unloadCalled);
+					Helper.ReplaceItemTexture(ItemID.MusicBoxBoss4, "Items/Replacments/Golem", unloadCalled);
+					Helper.ReplaceItemTexture(ItemID.MusicBoxTheHallow, "Items/Replacments/Hallow", unloadCalled);
+					Helper.ReplaceItemTexture(ItemID.MusicBoxHell, "Items/Replacments/Hell", unloadCalled);
+					Helper.ReplaceItemTexture(ItemID.MusicBoxIce, "Items/Replacments/Ice", unloadCalled);
+					Helper.ReplaceItemTexture(ItemID.MusicBoxMartians, "Items/Replacments/Martian", unloadCalled);
+					Helper.ReplaceItemTexture(ItemID.MusicBoxEerie, "Items/Replacments/Meteor", unloadCalled);
+					Helper.ReplaceItemTexture(ItemID.MusicBoxLunarBoss, "Items/Replacments/MoonLord", unloadCalled);
+					Helper.ReplaceItemTexture(ItemID.MusicBoxDD2, "Items/Replacments/OOA", unloadCalled);
+					Helper.ReplaceItemTexture(ItemID.MusicBoxTowers, "Items/Replacments/Pillar", unloadCalled);
+					Helper.ReplaceItemTexture(ItemID.MusicBoxBoss5, "Items/Replacments/QueenBee", unloadCalled);
+					Helper.ReplaceItemTexture(ItemID.MusicBoxRain, "Items/Replacments/Rain", unloadCalled);
+					Helper.ReplaceItemTexture(ItemID.MusicBoxSnow, "Items/Replacments/Snow", unloadCalled);
+					Helper.ReplaceItemTexture(ItemID.MusicBoxEclipse, "Items/Replacments/SolarEclipse", unloadCalled);
+					Helper.ReplaceItemTexture(ItemID.MusicBoxSpace, "Items/Replacments/Space", unloadCalled);
+					Helper.ReplaceItemTexture(ItemID.MusicBoxTitle, "Items/Replacments/Title", unloadCalled);
+					Helper.ReplaceItemTexture(ItemID.MusicBoxUndergroundCrimson, "Items/Replacments/UndergroundCrimson", unloadCalled);
+					Helper.ReplaceItemTexture(ItemID.MusicBoxUndergroundCorruption, "Items/Replacments/UndergroundCorruption", unloadCalled);
+					Helper.ReplaceItemTexture(ItemID.MusicBoxUndergroundHallow, "Items/Replacments/UndergroundHallow", unloadCalled);
+					Helper.ReplaceItemTexture(ItemID.MusicBoxBoss2, "Items/Replacments/WallOfFlesh", unloadCalled);
 				}
 			}
 		}
@@ -155,7 +150,7 @@ namespace EDAT
 							music = GetSoundSlot(SoundType.Music, "Sounds/Music/BloodMoon");
 							priority = MusicPriority.Event;
 						}
-						if (BirthdayParty.PartyIsUp && BiomeData.ZoneTown)
+						if (BirthdayParty.PartyIsUp && ExtraBiomes.ZoneTown(Main.LocalPlayer))
 						{
 							music = GetSoundSlot(SoundType.Music, "Sounds/Music/Party");
 							priority = MusicPriority.Event;
@@ -191,22 +186,22 @@ namespace EDAT
 							music = GetSoundSlot(SoundType.Music, "Sounds/Music/UndergroundDesert");
 							priority = MusicPriority.BiomeMedium;
 						}
-						if (BiomeData.ZoneMarble)
+						if (ExtraBiomes.ZoneMarble(Main.LocalPlayer))
 						{
 							music = GetSoundSlot(SoundType.Music, "Sounds/Music/Marble");
 							priority = MusicPriority.BiomeMedium;
 						}
-						if (BiomeData.ZoneGranite)
+						if (ExtraBiomes.ZoneGranite(Main.LocalPlayer))
 						{
 							music = GetSoundSlot(SoundType.Music, "Sounds/Music/Granite");
 							priority = MusicPriority.BiomeMedium;
 						}
-						if (BiomeData.ZoneSpiderCave)
+						if (ExtraBiomes.ZoneSpiderCave(Main.LocalPlayer))
 						{
 							music = GetSoundSlot(SoundType.Music, "Sounds/Music/SpiderCave");
 							priority = MusicPriority.BiomeMedium;
 						}
-						if (BiomeData.ZoneTown)
+						if (ExtraBiomes.ZoneTown(Main.LocalPlayer))
 						{
 							music = GetSoundSlot(SoundType.Music, "Sounds/Music/Village");
 							priority = MusicPriority.BiomeMedium;
@@ -224,57 +219,6 @@ namespace EDAT
 					}
 				}
 			}
-		}
-
-		public static void ReplaceItemTexture(int item, string newItemPath, bool unloadCalled)
-		{
-			Texture2D itemBackup = Main.itemTexture[item];
-
-			if (unloadCalled)
-				Main.itemTexture[item] = itemBackup;
-			else
-				Main.itemTexture[item] = ModContent.GetTexture(newItemPath);
-		}
-	}
-
-	public class Config : ModConfig
-	{
-		public override ConfigScope Mode => ConfigScope.ClientSide;
-
-		[Label("Underground Corruption's Theme Change")]
-		[Tooltip("True to change Underground Corruption's theme. This is a config option because it's the only biome that uses the vanilla underground corruption theme. True will have NO biomes play underground corruption, false will have the underground corruption play vanilla underground corruption")]
-		[DefaultValue(true)]
-		public bool UndergroundCorruptionTheme;
-
-		[Label("Underground Crimson's Theme Change")]
-		[Tooltip("True to change Underground Crimson's theme. This is a config option because it's the only biome that uses the vanilla underground crimson theme. True will have NO biomes play underground crimson, false will have the underground crimson play vanilla underground crimson")]
-		[DefaultValue(true)]
-		public bool UndergroundCrimsonTheme;
-	}
-
-	public class EDATPlayer : ModPlayer
-	{
-		public override void OnEnterWorld(Player player)
-		{
-			if (!Main.dedServ)
-				switch (TileUtils.GetDungeonColor())
-				{
-					case DungeonColor.Pink:
-						Main.tileTexture[TileID.MusicBoxes] = ModContent.GetTexture("EDAT/MusicBoxes_PinkDungeon");
-						EDAT.ReplaceItemTexture(ItemID.MusicBoxDungeon, "EDAT/Items/Replacments/PinkDungeon", ModContent.GetInstance<EDAT>().unloadCalled);
-						break;
-					case DungeonColor.Green:
-						Main.tileTexture[TileID.MusicBoxes] = ModContent.GetTexture("EDAT/MusicBoxes_GreenDungeon");
-						EDAT.ReplaceItemTexture(ItemID.MusicBoxDungeon, "EDAT/Items/Replacments/GreenDungeon", ModContent.GetInstance<EDAT>().unloadCalled);
-						break;
-					case DungeonColor.Blue:
-						Main.tileTexture[TileID.MusicBoxes] = ModContent.GetTexture("EDAT/MusicBoxes_BlueDungeon");
-						EDAT.ReplaceItemTexture(ItemID.MusicBoxDungeon, "EDAT/Items/Replacments/BlueDungeon", ModContent.GetInstance<EDAT>().unloadCalled);
-						break;
-					case DungeonColor.None:
-						Main.tileTexture[TileID.MusicBoxes] = ModContent.GetTexture("EDAT/MusicBoxes_BlueDungeon");
-						break;
-				}
 		}
 	}
 }
