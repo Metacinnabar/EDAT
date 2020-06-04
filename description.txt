@@ -32,3 +32,5 @@ The reason I replaced underground corruption is that, in my opinion, it doesn't 
 Toggle them off if you wish! I won't be mad!
 
 [c/ff0000:"Why not make all of them toggleable?"]- Because that's exactly what this mod is not trying to do. Every theme should feel unique, not just some. the reason the 3 are toggleable is that these are the only three that take another theme out of the game completely.
+
+German localization by TheStachelfisch

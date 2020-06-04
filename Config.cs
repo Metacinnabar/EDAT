@@ -7,13 +7,13 @@ namespace EDAT
 	{
 		public override ConfigScope Mode => ConfigScope.ClientSide;
 
-		[Label("Underground Corruption's Theme Change")]
-		[Tooltip("True to change Underground Corruption's theme. This is a config option because it's the only biome that uses the vanilla underground corruption theme. True will have NO biomes play underground corruption, false will have the underground corruption play vanilla underground corruption")]
+		[Label(Language.GetTextValue("Mods.EDAT.Common.UndergroundCorruptionThemeLabel"))]
+		[Tooltip(Language.GetTextValue("Mods.EDAT.Common.UndergroundCorruptionThemeTooltip"))]
 		[DefaultValue(true)]
 		public bool UndergroundCorruptionTheme;
 
-		[Label("Underground Crimson's Theme Change")]
-		[Tooltip("True to change Underground Crimson's theme. This is a config option because it's the only biome that uses the vanilla underground crimson theme. True will have NO biomes play underground crimson, false will have the underground crimson play vanilla underground crimson")]
+		[Label(Language.GetTextValue("Mods.EDAT.Common.UndergroundCrimsonThemeLabel"))]
+		[Tooltip(Language.GetTextValue("Mods.EDAT.Common.UndergroundCrimsonThemeTooltip"))]
 		[DefaultValue(true)]
 		public bool UndergroundCrimsonTheme;
 	}
