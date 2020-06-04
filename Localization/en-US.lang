@@ -1,0 +1,5 @@
+Common.UndergroundCorruptionThemeLabel=Underground Corruption's Theme Change
+Common.UndergroundCrimsonThemeLabel=Underground Crimson's Theme Change
+
+Common.UndergroundCorruptionThemeTooltip=True to change Underground Corruption's theme. This is a config option because it's the only biome that uses the vanilla underground corruption theme. True will have NO biomes play underground corruption, false will have the underground corruption play vanilla underground corruption
+Common.UndergroundCrimsonThemeTooltip=True to change Underground Crimson's theme. This is a config option because it's the only biome that uses the vanilla underground crimson theme. True will have NO biomes play underground crimson, false will have the underground crimson play vanilla underground crimson
