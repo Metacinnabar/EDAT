@@ -1,6 +1,6 @@
 # EDAT
 Hi, I'm Lonely Star.
-Massive, massive thanks to GoodPro712, through him I am able to present you one of the uniquer mods!
+Massive, massive thanks to Metacinnabar, through him I am able to present you one of the uniquer mods!
 
 This mod does not replaces themes. This is NOT a music replacement mod. You will still find every theme you love somewhere in the game.
 
